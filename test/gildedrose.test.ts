@@ -13,7 +13,7 @@ describe("Gilded rose tests", () => {
       new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
       new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
       // this conjured item does not work properly yet
-      new Item("Conjured Mana Cake", 3, 6),
+      // new Item("Conjured Mana Cake", 3, 6),
     ];
 
     const gr = new GildedRose(items);
@@ -23,5 +23,13 @@ describe("Gilded rose tests", () => {
       gr.updateQuality();
     }
     expect(items[0].quality).toEqual(17);
+    expect(items[1].quality).toEqual(4);
+    expect(items[2].quality).toEqual(4);
+    expect(items[3].quality).toEqual(80);
+    expect(items[4].quality).toEqual(80);
+    expect(items[5].quality).toEqual(23);
+    expect(items[6].quality).toEqual(50);
+    expect(items[7].quality).toEqual(50);
+    // expect(items[8].quality).toEqual(?);
   });
 });
