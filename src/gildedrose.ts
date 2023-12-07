@@ -11,33 +11,31 @@ export class Item {
 }
 
 export class GildedRose {
-  items: Array<Item>;
+  private maxQuality: number;
+  private items: Array<Item>;
 
-  constructor(items = [] as Array<Item>) {
+  constructor(items: Array<Item>, maxQuality: number = 50) {
     this.items = items;
+    this.maxQuality = maxQuality;
   }
 
   updateQuality() {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
-      if (!this.isMaturing(item) && !this.isTicket(item)) {
-        if (item.quality > 0) {
-          if (!this.isLegendary(item)) {
-            item.quality = item.quality - 1;
-          }
-        }
+      if (this.isSimpleItem(item) && item.quality > 0) {
+        item.quality = item.quality - 1;
       } else {
-        if (item.quality < 50) {
+        if (this.isLessThanMaxQuality(item.quality)) {
           item.quality = item.quality + 1;
           if (this.isTicket(item)) {
             if (item.sellIn < 11) {
-              if (item.quality < 50) {
+              if (this.isLessThanMaxQuality(item.quality)) {
                 item.quality = item.quality + 1;
               }
             }
             if (item.sellIn < 6) {
-              if (item.quality < 50) {
+              if (this.isLessThanMaxQuality(item.quality)) {
                 item.quality = item.quality + 1;
               }
             }
@@ -59,7 +57,7 @@ export class GildedRose {
             item.quality = item.quality - item.quality;
           }
         } else {
-          if (item.quality < 50) {
+          if (this.isLessThanMaxQuality(item.quality)) {
             item.quality = item.quality + 1;
           }
         }
@@ -67,6 +65,16 @@ export class GildedRose {
     }
 
     return this.items;
+  }
+  
+  private isSimpleItem(item: Item) {
+    return (
+      !this.isMaturing(item) && !this.isTicket(item) && !this.isLegendary(item)
+    );
+  }
+
+  private isLessThanMaxQuality(quality: number) {
+    return quality < this.maxQuality;
   }
 
   private isLegendary(item: Item): boolean {
