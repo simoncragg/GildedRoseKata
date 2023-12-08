@@ -59,7 +59,7 @@ export class GildedRose {
           }
         }
 
-        if (this.isMaturing(item) && this.isLessThanMaxQuality(item.quality)) {
+        else if (this.isLessThanMaxQuality(item.quality)) {
           item.quality = item.quality + 1;
         }
       }
