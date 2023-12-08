@@ -48,8 +48,8 @@ export class GildedRose {
         if (!this.isMaturing(item)) {
           if (
             !this.isTicket(item) &&
-            item.quality > 0 &&
-            !this.isLegendary(item)
+            !this.isLegendary(item) &&
+            item.quality > 0
           ) {
             item.quality = item.quality - 1;
           }
