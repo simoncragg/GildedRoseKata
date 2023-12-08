@@ -57,9 +57,8 @@ export class GildedRose {
           if (this.isTicket(item)) {
             item.quality = item.quality - item.quality;
           }
-        }
-
-        else if (this.isLessThanMaxQuality(item.quality)) {
+          
+        } else if (this.isLessThanMaxQuality(item.quality)) {
           item.quality = item.quality + 1;
         }
       }
