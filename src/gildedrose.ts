@@ -28,16 +28,15 @@ export class GildedRose {
       } else {
         if (this.isLessThanMaxQuality(item.quality)) {
           item.quality = item.quality + 1;
-          if (this.isTicket(item)) {
-            if (item.sellIn < 11) {
-              if (this.isLessThanMaxQuality(item.quality)) {
-                item.quality = item.quality + 1;
-              }
-            }
-            if (item.sellIn < 6) {
-              if (this.isLessThanMaxQuality(item.quality)) {
-                item.quality = item.quality + 1;
-              }
+          if (
+            this.isTicket(item) &&
+            item.sellIn < 11 &&
+            this.isLessThanMaxQuality(item.quality)
+          ) {
+            item.quality = item.quality + 1;
+
+            if (item.sellIn < 6 && this.isLessThanMaxQuality(item.quality)) {
+              item.quality = item.quality + 1;
             }
           }
         }
@@ -47,26 +46,28 @@ export class GildedRose {
       }
       if (item.sellIn < 0) {
         if (!this.isMaturing(item)) {
-          if (!this.isTicket(item)) {
-            if (item.quality > 0) {
-              if (!this.isLegendary(item)) {
-                item.quality = item.quality - 1;
-              }
-            }
-          } else {
+          if (
+            !this.isTicket(item) &&
+            item.quality > 0 &&
+            !this.isLegendary(item)
+          ) {
+            item.quality = item.quality - 1;
+          }
+
+          if (this.isTicket(item)) {
             item.quality = item.quality - item.quality;
           }
-        } else {
-          if (this.isLessThanMaxQuality(item.quality)) {
-            item.quality = item.quality + 1;
-          }
+        }
+
+        if (this.isMaturing(item) && this.isLessThanMaxQuality(item.quality)) {
+          item.quality = item.quality + 1;
         }
       }
     }
 
     return this.items;
   }
-  
+
   private isSimpleItem(item: Item) {
     return (
       !this.isMaturing(item) && !this.isTicket(item) && !this.isLegendary(item)
