@@ -28,7 +28,10 @@ export class GildedRose {
       }
 
       if (item.sellIn < 0) {
-        if (!this.isMaturing(item)) {
+        if (this.isMaturing(item) && this.isLessThanMaxQuality(item.quality)) {
+          this.incrementQuality(item);
+        }
+        else {
           if (!this.isLegendary(item) && item.quality > 0) {
             this.decrementQuality(item);
           }
@@ -36,8 +39,6 @@ export class GildedRose {
           if (this.isTicket(item)) {
             this.decrementQuality(item);
           }
-        } else if (this.isLessThanMaxQuality(item.quality)) {
-          this.incrementQuality(item);
         }
       }
     }
