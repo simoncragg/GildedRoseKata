@@ -1,6 +1,6 @@
-import { GildedRose, Item } from "../src/gildedrose";
+import { GildedRose } from "../src/gildedrose";
+import { Item } from "../src/Item";
 
-//test for what the quality is for each item below
 describe("Gilded rose tests", () => {
   it("should work", () => {
     const items = [
