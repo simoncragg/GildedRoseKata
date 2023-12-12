@@ -24,7 +24,7 @@ export class GildedRose {
       }
 
       if (!this.isLegendary(item)) {
-        item.sellIn = item.sellIn - 1;
+        this.decrementSellIn(item);
       }
 
       if (item.sellIn < 0) {
@@ -66,6 +66,10 @@ export class GildedRose {
 
   private decrementQuality(item: Item) {
     item.quality = item.quality - 1;
+  }
+
+  private decrementSellIn(item: Item) {
+    item.sellIn = item.sellIn - 1;
   }
 
   private isSimpleItem(item: Item) {
