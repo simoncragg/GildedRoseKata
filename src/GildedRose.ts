@@ -46,15 +46,17 @@ export class GildedRose {
     return this.items;
   }
 
-  updateTicketQuality(item: Item) {
-    if (this.isLessThanMaxQuality(item.quality)) {
+  private updateTicketQuality(item: Item) {
+
+    if (item.quality >= this.maxQuality) return;
+    this.incrementQuality(item);
+
+    if (item.sellIn < 11 && item.quality < this.maxQuality) {
       this.incrementQuality(item);
-      if (item.sellIn < 11 && this.isLessThanMaxQuality(item.quality)) {
-        this.incrementQuality(item);
-        if (item.sellIn < 6 && this.isLessThanMaxQuality(item.quality)) {
-          this.incrementQuality(item);
-        }
-      }
+    }
+
+    if (item.sellIn < 6 && item.quality < this.maxQuality) {
+      this.incrementQuality(item);
     }
   }
 
