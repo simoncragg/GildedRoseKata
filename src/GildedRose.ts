@@ -23,9 +23,7 @@ export class GildedRose {
         this.incrementQuality(item);
       }
 
-      if (!this.isLegendary(item)) {
-        this.decrementSellIn(item);
-      }
+      this.updateSellIn(item);
 
       if (item.sellIn < 0) {
         if (this.isMaturing(item) && this.isLessThanMaxQuality(item.quality)) {
@@ -44,6 +42,12 @@ export class GildedRose {
     }
 
     return this.items;
+  }
+
+  private updateSellIn(item: Item) {
+    if (!this.isLegendary(item)) {
+      this.decrementSellIn(item);
+    }
   }
 
   private updateSimpleItem(item: Item) {
