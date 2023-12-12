@@ -14,7 +14,7 @@ export class GildedRose {
       const item = this.items[i];
 
       if (this.isSimpleItem(item) && item.quality > 0) {
-        item.quality = item.quality - 1;
+        this.decrementQuality(item);
       } else {
         if (this.isLessThanMaxQuality(item.quality)) {
           item.quality = item.quality + 1;
@@ -37,7 +37,7 @@ export class GildedRose {
       if (item.sellIn < 0) {
         if (!this.isMaturing(item)) {
           if (!this.isLegendary(item) && item.quality > 0) {
-            item.quality = item.quality - 1;
+            this.decrementQuality(item);
           }
 
           if (this.isTicket(item)) {
@@ -50,6 +50,10 @@ export class GildedRose {
     }
 
     return this.items;
+  }
+
+  private decrementQuality(item: Item) {
+    item.quality = item.quality - 1;
   }
 
   private isSimpleItem(item: Item) {
