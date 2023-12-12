@@ -15,22 +15,14 @@ export class GildedRose {
 
       if (this.isSimpleItem(item) && item.quality > 0) {
         this.decrementQuality(item);
-      } else {
-        if (this.isLessThanMaxQuality(item.quality)) {
-          this.incrementQuality(item);
-          if (
-            this.isTicket(item) &&
-            item.sellIn < 11 &&
-            this.isLessThanMaxQuality(item.quality)
-          ) {
-            this.incrementQuality(item);
-
-            if (item.sellIn < 6 && this.isLessThanMaxQuality(item.quality)) {
-              this.incrementQuality(item);
-            }
-          }
-        }
       }
+      else if (this.isTicket(item)) {
+        this.updateTicketQuality(item);
+      }
+      else if (this.isLessThanMaxQuality(item.quality)) {
+        this.incrementQuality(item);
+      }
+
       if (!this.isLegendary(item)) {
         item.sellIn = item.sellIn - 1;
       }
@@ -50,6 +42,18 @@ export class GildedRose {
     }
 
     return this.items;
+  }
+
+  updateTicketQuality(item: Item) {
+    if (this.isLessThanMaxQuality(item.quality)) {
+      this.incrementQuality(item);
+      if (item.sellIn < 11 && this.isLessThanMaxQuality(item.quality)) {
+        this.incrementQuality(item);
+        if (item.sellIn < 6 && this.isLessThanMaxQuality(item.quality)) {
+          this.incrementQuality(item);
+        }
+      }
+    }
   }
 
   private incrementQuality(item: Item) {
