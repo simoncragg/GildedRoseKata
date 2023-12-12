@@ -26,6 +26,7 @@ export class GildedRose {
       if (!this.isLegendary(item)) {
         item.sellIn = item.sellIn - 1;
       }
+
       if (item.sellIn < 0) {
         if (!this.isMaturing(item)) {
           if (!this.isLegendary(item) && item.quality > 0) {
@@ -33,7 +34,7 @@ export class GildedRose {
           }
 
           if (this.isTicket(item)) {
-            item.quality = item.quality - item.quality;
+            this.decrementQuality(item);
           }
         } else if (this.isLessThanMaxQuality(item.quality)) {
           this.incrementQuality(item);
