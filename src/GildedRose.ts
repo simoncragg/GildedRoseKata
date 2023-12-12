@@ -13,8 +13,8 @@ export class GildedRose {
     for (let i = 0; i < this.items.length; i++) {
       const item = this.items[i];
 
-      if (this.isSimpleItem(item) && item.quality > 0) {
-        this.decrementQuality(item);
+      if (this.isSimpleItem(item)) {
+        this.updateSimpleItem(item);
       }
       else if (this.isTicket(item)) {
         this.updateTicketQuality(item);
@@ -44,6 +44,12 @@ export class GildedRose {
     }
 
     return this.items;
+  }
+
+  private updateSimpleItem(item: Item) {
+    if (item.quality > 0) {
+      this.decrementQuality(item);
+    }
   }
 
   private updateTicketQuality(item: Item) {
