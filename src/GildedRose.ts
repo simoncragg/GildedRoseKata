@@ -17,16 +17,16 @@ export class GildedRose {
         this.decrementQuality(item);
       } else {
         if (this.isLessThanMaxQuality(item.quality)) {
-          item.quality = item.quality + 1;
+          this.incrementQuality(item);
           if (
             this.isTicket(item) &&
             item.sellIn < 11 &&
             this.isLessThanMaxQuality(item.quality)
           ) {
-            item.quality = item.quality + 1;
+            this.incrementQuality(item);
 
             if (item.sellIn < 6 && this.isLessThanMaxQuality(item.quality)) {
-              item.quality = item.quality + 1;
+              this.incrementQuality(item);
             }
           }
         }
@@ -44,12 +44,16 @@ export class GildedRose {
             item.quality = item.quality - item.quality;
           }
         } else if (this.isLessThanMaxQuality(item.quality)) {
-          item.quality = item.quality + 1;
+          this.incrementQuality(item);
         }
       }
     }
 
     return this.items;
+  }
+
+  private incrementQuality(item: Item) {
+    item.quality = item.quality + 1;
   }
 
   private decrementQuality(item: Item) {
