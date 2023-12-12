@@ -1,4 +1,4 @@
-import { GildedRose } from "../src/gildedrose";
+import { GildedRose } from "../src/GildedRose";
 import { Item } from "../src/Item";
 
 describe("Gilded rose tests", () => {
