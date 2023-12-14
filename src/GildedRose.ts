@@ -17,13 +17,14 @@ export class GildedRose {
         this.updateSimpleItem(item);
       }
       else if (this.isTicket(item)) {
-        this.updateTicketQuality(item);
+        this.updateTicketItem(item);
       }
       else if (this.isLessThanMaxQuality(item.quality)) {
         this.incrementQuality(item);
       }
 
       if (this.isSimpleItem(item)) continue;
+      if (this.isTicket(item)) continue;
 
       this.updateSellIn(item);
 
@@ -33,10 +34,6 @@ export class GildedRose {
         }
         else {
           if (!this.isLegendary(item) && item.quality > 0) {
-            this.decrementQuality(item);
-          }
-
-          if (this.isTicket(item)) {
             this.decrementQuality(item);
           }
         }
@@ -64,7 +61,7 @@ export class GildedRose {
     }
   }
 
-  private updateTicketQuality(item: Item) {
+  private updateTicketItem(item: Item) {
 
     if (item.quality >= this.maxQuality) return;
     this.incrementQuality(item);
@@ -75,6 +72,12 @@ export class GildedRose {
 
     if (item.sellIn < 6 && item.quality < this.maxQuality) {
       this.incrementQuality(item);
+    }
+
+    this.updateSellIn(item);
+
+    if (item.sellIn < 0) {
+      this.decrementQuality(item);
     }
   }
 
