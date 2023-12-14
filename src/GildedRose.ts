@@ -87,19 +87,19 @@ export class GildedRose {
     );
   }
 
-  private isLessThanMaxQuality(quality: number) {
-    return quality < this.maxQuality;
-  }
-
-  private isLegendary(item: Item): boolean {
-    return item.name === "Sulfuras, Hand of Ragnaros";
-  }
-
   private isMaturing(item: Item): boolean {
     return item.name === "Aged Brie";
   }
 
   private isTicket(item: Item): boolean {
     return item.name === "Backstage passes to a TAFKAL80ETC concert";
+  }
+
+  private isLegendary(item: Item): boolean {
+    return item.name === "Sulfuras, Hand of Ragnaros";
+  }
+
+  private isLessThanMaxQuality(quality: number) {
+    return quality < this.maxQuality;
   }
 }
