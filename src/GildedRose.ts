@@ -23,6 +23,8 @@ export class GildedRose {
         this.incrementQuality(item);
       }
 
+      if (this.isSimpleItem(item)) continue;
+
       this.updateSellIn(item);
 
       if (item.sellIn < 0) {
@@ -52,6 +54,12 @@ export class GildedRose {
 
   private updateSimpleItem(item: Item) {
     if (item.quality > 0) {
+      this.decrementQuality(item);
+    }
+
+    this.updateSellIn(item);
+
+    if (item.sellIn < 0 && item.quality > 0) {
       this.decrementQuality(item);
     }
   }
