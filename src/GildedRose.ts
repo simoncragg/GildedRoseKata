@@ -22,18 +22,6 @@ export class GildedRose {
       else if (this.isTicket(item)) {
         this.updateTicketItem(item);
       }
-
-      if (this.isSimpleItem(item)) continue;
-      if (this.isTicket(item)) continue;
-      if (this.isMaturing(item)) continue;
-
-      this.updateSellIn(item);
-
-      if (item.sellIn < 0) {
-        if (!this.isLegendary(item) && item.quality > 0) {
-          this.decrementQuality(item);
-        }
-      }
     }
 
     return this.items;
