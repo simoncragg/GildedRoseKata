@@ -40,13 +40,13 @@ export class GildedRose {
   }
 
   private updateMaturingItem(item: Item) {
-    if (this.isLessThanMaxQuality(item.quality)) {
+    if (this.isLessThanMaxQuality(item)) {
       this.incrementQuality(item);
     }
 
     this.decrementSellIn(item);
 
-    if (item.sellIn < 0 && this.isLessThanMaxQuality(item.quality)) {
+    if (item.sellIn < 0 && this.isLessThanMaxQuality(item)) {
       this.incrementQuality(item);
     }
   }
@@ -99,7 +99,7 @@ export class GildedRose {
     return item.name === "Sulfuras, Hand of Ragnaros";
   }
 
-  private isLessThanMaxQuality(quality: number) {
-    return quality < this.maxQuality;
+  private isLessThanMaxQuality(item: Item) {
+    return item.quality < this.maxQuality;
   }
 }
